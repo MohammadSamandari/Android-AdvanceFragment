@@ -1,6 +1,7 @@
 package mohammad.samandari.advancefragment1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.View;
+import android.widget.DatePicker;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.remove(fragment2).commit();
         }
+
+    }
+
+    public void showDatePicker (View view) {
+        DatePickerFragment datePickerFragment = new DatePickerFragment();
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(datePickerFragment, "tag").commit();
 
     }
 }
