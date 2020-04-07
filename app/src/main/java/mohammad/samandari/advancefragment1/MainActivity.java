@@ -5,13 +5,15 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModel;
 
 import android.os.Bundle;
 import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentWithLayout.OnFragmentInteractionListener {
 
     FragmentManager fragmentManager;
 
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //Cheaking to see if fragment is showing.
         if (fragmentManager.findFragmentById(R.id.frameLayout) == null) {
             //Adding the Fragment to the layout
-            transaction.add(R.id.frameLayout, fragment1).commit();
+            transaction.add(R.id.frameLayout, fragment1).addToBackStack(null).commit();
         }
     }
 
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //checking to see if the fragment is showing
         if (fragment1 != null) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.remove(fragment1).commit();
+            transaction.remove(fragment1).addToBackStack(null).commit();
         }
     }
 
@@ -76,5 +78,10 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(datePickerFragment, "tag").commit();
 
+    }
+
+    @Override
+    public void onFragment2ButtonClick (String string) {
+        Toast.makeText(this, string, Toast.LENGTH_SHORT).show();
     }
 }
